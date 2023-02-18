@@ -14,8 +14,8 @@ import MenuApi from "./api/index.js";
 // - [x] fetch 비동기 api를 사용하는 부분을 async await을 사용하여 구현한다.
 
 // TODO 사용자 경험
-// - [ ] API 통신이 실패하는 경우에 대해 사용자가 알 수 있게 alert로 예외처리를 진행한다.
-// - [ ] 중복되는 메뉴는 추가할 수 없다.
+// - [] API 통신이 실패하는 경우에 대해 사용자가 알 수 있게 alert로 예외처리를 진행한다.
+// - [] 중복되는 메뉴는 추가할 수 없다.
 
 function App() {
   this.menu = {
@@ -81,6 +81,15 @@ function App() {
   const addMenuName = async () => {
     if ($("#menu-name").value === "") {
       alert("값을 입력해주세요");
+      return;
+    }
+    const isDuplicatedItem = this.menu[this.currentCategory].find(
+      menuItem => menuItem.name === $("#menu-name").value
+    );
+    console.log(isDuplicatedItem);
+    if (isDuplicatedItem) {
+      alert("이미 등록된 메뉴입니다. 다시 입력해주세요");
+      $("#menu-name").value = "";
       return;
     }
 
